@@ -15,4 +15,4 @@ const certificate = fs.readFileSync('example.com.crt');
 const credentials = { key: privateKey, cert: certificate };
 
 const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(443);
+httpsServer.listen(3000);
