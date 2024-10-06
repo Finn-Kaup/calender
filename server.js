@@ -10,8 +10,8 @@ app.use(cors());
 app.use(express.static("public"));
 app.use(router);
 
-const privateKey = fs.readFileSync('./ssl/example.com.key');
-const certificate = fs.readFileSync('./ssl/example.com.crt');
+const privateKey = fs.readFileSync('example.com.key');
+const certificate = fs.readFileSync('example.com.crt');
 const credentials = { key: privateKey, cert: certificate };
 
 const httpsServer = https.createServer(credentials, app);
