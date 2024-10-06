@@ -1,13 +1,18 @@
 const express = require("express");
 const app = express();
-var cors = require('cors');
+const cors = require('cors');
+const router = require("./routes/routes");
+const fs = require("fs");
+const https = require('https');
 
 app.use(express.json());
 app.use(cors());
 app.use(express.static("public"));
-
-const router = require("./routes/routes");
-
 app.use(router);
 
-app.listen(3000);
+const privateKey = fs.readFileSync('./ssl/example.com.key');
+const certificate = fs.readFileSync('./ssl/example.com.crt');
+const credentials = { key: privateKey, cert: certificate };
+
+const httpsServer = https.createServer(credentials, app);
+httpsServer.listen(443);
