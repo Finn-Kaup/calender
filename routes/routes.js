@@ -41,6 +41,10 @@ router.delete("/:collection/delete", async (req, res) => {
   res.send(data);
 });
 
+router.post("/birthdays/post/", async (req, res) => {
+  await db(birthdays, "insertOne", req.body);
+});
+
 
 async function db(collection, operation, data, updateSort) {
   const client = new MongoClient(uri);

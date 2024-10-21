@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: grid;
+            margin: 10px;
+        }
+
+        input, button {
+            text-align: center;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 100px;
+            font-size: 3rem;
+            width: 100%;
+            justify-self: center;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: rgb(0, 194, 119);
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <input id="firstName" type="text" placeholder="Vor Name">
+    <input id="lastName" type="text" placeholder="Nach Name">
+    <input id="day" type="number" placeholder="Tag">
+    <input id="month" type="number" placeholder="Monat">
+    <input id="year" type="number" placeholder="Jahr">
+    <button onclick="submit()">Bestätigen</button>
+    
+    <script>
+        const firstName = document.getElementById("firstName");
+        const lastName = document.getElementById("lastName");
+        const day = document.getElementById("day");
+        const month = document.getElementById("month");
+        const year = document.getElementById("year");
+
+        
+        url = "http://[2a00:6020:b443:be00:c175:a651:2dd2:53d4]:3000"; // server
+        //url = "http://[2a00:6020:b443:be00:dbd:4f23:6e61:65f5]:3000"; // local
+
+        async function submit() {
+            await fetch(url + "/birthdays/post/", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    "first-name": firstName.value,
+                    "last-name": lastName.value,
+                    "day": parseInt(day.value),
+                    "month": parseInt(month.value),
+                    "year": parseInt(year.value),
+                })
+            });
+        }
+    </script>
+</body>
+</html>
